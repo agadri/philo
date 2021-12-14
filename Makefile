@@ -6,7 +6,7 @@
 #    By: adegadri <adegadri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 19:28:55 by adegadri          #+#    #+#              #
-#    Updated: 2021/12/06 15:49:54 by adegadri         ###   ########.fr        #
+#    Updated: 2021/12/14 18:25:05 by adegadri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,15 @@ DEL =	/bin/rm -f
 
 SRCS =  philo.c \
 		utils.c \
-		time_to.c
+		time_to.c \
+		init.c \
+		if_time_to.c \
+		check.c \
+		print.c
 
 OBJS    = ${SRCS:.c=.o}
 
-CFLAGS    = -Wall -Werror -Wextra -g
+CFLAGS    = -Wall -Werror -Wextra -g -fsanitize=thread
 
 CC        = gcc
 

@@ -6,7 +6,7 @@
 /*   By: adegadri <adegadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 19:56:31 by adegadri          #+#    #+#             */
-/*   Updated: 2021/12/07 20:08:35 by adegadri         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:44:18 by adegadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ typedef struct s_diner
 	pthread_mutex_t		check_stop;
 	struct timeval		start;
 	struct timeval		end;
-	float				timer;
+	unsigned int				timer;//
 	t_fork				*forks;
+	struct timeval		time_print;
+	struct timeval		time_all;
 	struct timeval		time_die_start;
 	struct timeval		time_die_end;
 	struct timeval		time_meal_start;
@@ -47,15 +49,19 @@ typedef struct s_philo
 	pthread_mutex_t		mutex_fourchette;
 	pthread_mutex_t		mutex_init;
 	pthread_t			thread_philo;
+	pthread_mutex_t		time_eat;
+	pthread_mutex_t		time_write;
+	pthread_mutex_t		*mutex_eat_dead;
+	pthread_mutex_t		philo_state;
 	pthread_mutex_t		*left;
 	t_diner				time;
 	int					state;
 	int					if_ac;
 	int					id_philo;
 	int					nbr_of_philo;	
-	int					time_to_eat;
-	int					time_to_sleep;
-	int					time_to_die;
+	unsigned int		time_to_eat;
+	unsigned int		time_to_sleep;
+	unsigned int		time_to_die;
 	int					nbr_of_times_philo_must_eat;
 }	t_philo;
 
@@ -68,17 +74,26 @@ typedef struct s_stock
 	int			nb_philo;
 }	t_stock;
 
-int		ft_atoi(char *str);
+unsigned int		ft_atoi(char *str);
+void	ft_putchar(char c);
+void	ft_putnbr(long long n);
 int		time_to_eat(t_philo *philo);
 int		ft_malloc_all(t_stock *stock);
 int		time_to_sleep(t_philo *philo);
 int		time_to_think(t_philo *philo);
 int		init_timer(t_stock *stock, int ac, char **av);
-float	time_diff(struct timeval *start, struct timeval *end);
+unsigned int	time_diff(struct timeval *start, struct timeval *end);
 int		time_to_die(t_philo *philo);
 int		if_all_philo_eat(t_philo *philo);
 void	init_left_right(t_stock *stock);
 int		check_if_all_philo_eat(t_philo *philo);
 int		check_state(t_philo *philo);
-
+int		init_mutex(t_stock *stock);
+int	ft_sleep(t_philo *philo, int time_of_sleep);
+int		ft_strlen(char *str);
+void	ft_putstr(char *str);
+int		if_print(t_philo *philo, char *str);
+int		when_take_fork(t_philo *philo);
+void	ft_free_all(t_stock *stock);
+int		only_1(t_philo *philo);
 #endif
