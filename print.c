@@ -6,7 +6,7 @@
 /*   By: adegadri <adegadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:25:32 by adegadri          #+#    #+#             */
-/*   Updated: 2021/12/14 19:09:12 by adegadri         ###   ########.fr       */
+/*   Updated: 2021/12/14 20:09:33 by adegadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,17 @@ void	ft_putnbr(long long n)
 
 int	if_print(t_philo *philo, char *str)
 {
-	unsigned int tv;
+	unsigned int	tv;
+
 	pthread_mutex_lock(philo->mutex_eat_dead);
-	if (check_state(philo) == 0 )
-	{
-		pthread_mutex_unlock(philo->mutex_eat_dead);
+	if (check_state(philo) == 0)
 		return (-1);
-	}
 	gettimeofday(&philo->time.time_print, NULL);
 	tv = time_diff(&philo->time.time_all, &philo->time.time_print);
-	
-	
 	ft_putnbr(tv);
 	ft_putstr(" philo: ");
 	ft_putnbr(philo->id_philo);
 	ft_putstr(str);
 	ft_putchar('\n');
-	pthread_mutex_unlock(philo->mutex_eat_dead);
 	return (0);
 }

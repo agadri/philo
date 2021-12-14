@@ -6,7 +6,7 @@
 /*   By: adegadri <adegadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 19:53:09 by adegadri          #+#    #+#             */
-/*   Updated: 2021/12/14 19:08:24 by adegadri         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:46:18 by adegadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	check_state(t_philo *philo)
 	int	i;
 	int	j;
 
-//	pthread_mutex_lock(philo->mutex_eat_dead);
 	j = 0;
 	i = 1 + (philo->id_philo * -1);
 	while (j < philo->nbr_of_philo)
@@ -54,22 +53,21 @@ int	check_state(t_philo *philo)
 		if (philo[i].state != 0)
 		{
 			pthread_mutex_unlock(&philo[i].philo_state);
-//			pthread_mutex_unlock(philo->mutex_eat_dead);
 			return (0);
 		}
 		pthread_mutex_unlock(&philo[i].philo_state);
 		i++;
 		j++;
 	}
-//	pthread_mutex_unlock(philo->mutex_eat_dead);
 	return (1);
 }
 
 int	only_1(t_philo *philo)
 {
 	if_print(philo, " Has taken a fork");
+	pthread_mutex_unlock(philo->mutex_eat_dead);
 	if (ft_sleep(philo, philo->time_to_die) == -1)
-		return(-1);
+		return (-1);
 	time_to_die(philo);
 	return (0);
 }

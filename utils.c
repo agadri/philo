@@ -6,13 +6,13 @@
 /*   By: adegadri <adegadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 19:37:47 by adegadri          #+#    #+#             */
-/*   Updated: 2021/12/14 18:08:46 by adegadri         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:29:39 by adegadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-unsigned  int	ft_atoi(char *str)
+unsigned	int	ft_atoi(char *str)
 {
 	int	neg;
 	int	i;
@@ -46,18 +46,20 @@ unsigned int	time_diff(struct timeval *start, struct timeval *end)
 
 int	ft_sleep(t_philo *philo, int time_of_sleep)
 {
-	struct timeval tv;
-	
+	struct timeval	tv;
+	unsigned int	cur;
+	unsigned int	end;
+
 	gettimeofday(&tv, NULL);
-	unsigned int cur = (unsigned int)(1000 * tv.tv_sec + 0.001 * tv.tv_usec);
-	unsigned int end = cur + time_of_sleep;
+	cur = (unsigned int)(1000 * tv.tv_sec + 0.001 * tv.tv_usec);
+	end = cur + time_of_sleep;
 	while (cur < end)
 	{
 		usleep(100);
 		gettimeofday(&tv, NULL);
 		cur = (unsigned int)(1000 * tv.tv_sec + 0.001 * tv.tv_usec);
 		if (time_to_die(philo) == -1)
-			return(-1);
+			return (-1);
 	}
 	return (0);
 }

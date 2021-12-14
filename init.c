@@ -6,7 +6,7 @@
 /*   By: adegadri <adegadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 19:51:48 by adegadri          #+#    #+#             */
-/*   Updated: 2021/12/14 18:47:28 by adegadri         ###   ########.fr       */
+/*   Updated: 2021/12/14 20:31:25 by adegadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,11 @@ int	init_timer(t_stock *stock, int ac, char **av)
 	int	i;
 
 	i = 0;
-	
 	while (i < stock->nb_philo)
 	{
 		if (ac >= 5)
 		{
 			gettimeofday(&stock->philo[i].time.time_die_start, NULL);
-			
 			stock->philo[i].id_philo = i + 1;
 			stock->philo[i].time_to_die = ft_atoi(av[2]);
 			stock->philo[i].time_to_eat = ft_atoi(av[3]);
@@ -91,11 +89,9 @@ int	init_timer(t_stock *stock, int ac, char **av)
 	return (0);
 }
 
-void	ft_free_all(t_stock *stock)
+void	init_all(t_stock *stock, int ac, char **av)
 {
-	if (stock->philo->mutex_eat_dead)
-		free(stock->philo->mutex_eat_dead);
-	free(stock->philo);
-	if (stock->fourchette)
-		free(stock->fourchette);
+	init_timer(stock, ac, av);
+	init_mutex(stock);
+	init_left_right(stock);
 }

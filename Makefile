@@ -6,7 +6,7 @@
 #    By: adegadri <adegadri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 19:28:55 by adegadri          #+#    #+#              #
-#    Updated: 2021/12/14 18:25:05 by adegadri         ###   ########.fr        #
+#    Updated: 2021/12/14 20:14:05 by adegadri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS =  philo.c \
 		init.c \
 		if_time_to.c \
 		check.c \
-		print.c
+		print.c \
+		free.c
 
 OBJS    = ${SRCS:.c=.o}
 
